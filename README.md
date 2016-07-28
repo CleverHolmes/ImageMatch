@@ -3,7 +3,7 @@
 [![Documentation Status](https://readthedocs.org/projects/image-match/badge/?version=latest)](https://image-match.readthedocs.org/en/latest/)
 
 # image-match
-image-match is a simple package for finding approximate image matches from a
+image-match is a simple (now Python 3!) package for finding approximate image matches from a
 corpus.  It is similar, for instance, to [pHash](http://www.phash.org/), but
 includes a database backend that easily scales to billions of images and
 supports sustained high rates of image insertion: up to 10,000 images/s on our
