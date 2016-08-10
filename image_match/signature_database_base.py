@@ -257,7 +257,7 @@ class SignatureDatabaseBase(object):
         # this will only take one iteration
         result = []
 
-        orientations = np.unique(np.ravel(list(orientations)))
+        orientations = set(np.ravel(list(orientations)))
         for transform in orientations:
             # compose all functions and apply on signature
             transformed_img = transform(img)
