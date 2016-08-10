@@ -155,6 +155,7 @@ def test_add_image_with_metadata(ses):
     assert 'dist' in r[0]
     assert 'id' in r[0]
 
+
 def test_all_orientations(ses):
     im = Image.open('test1.jpg')
     im.rotate(90, expand=True).save('rotated_test1.jpg')
@@ -165,3 +166,8 @@ def test_all_orientations(ses):
     assert len(r) == 1
     assert r[0]['path'] == 'test1.jpg'
     assert r[0]['dist'] < 0.05  # some error from rotation
+
+    with open('rotated_test1.jpg', 'rb') as f:
+        r = ses.search_image(f.read(), bytestream=True, all_orientations=True)
+        assert len(r) == 1
+        assert r[0]['dist'] < 0.05  # some error from rotation
