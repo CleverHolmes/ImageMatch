@@ -2,7 +2,8 @@
 [![PyPI](https://img.shields.io/pypi/v/image-match.svg)](https://pypi.python.org/pypi/image-match)
 [![Documentation Status](https://readthedocs.org/projects/image-match/badge/?version=latest)](https://image-match.readthedocs.org/en/latest/)
 
-# image-match
+![image-match](https://cloud.githubusercontent.com/assets/6517700/17741093/41040a64-649b-11e6-8499-48b78ddca56b.png)
+
 image-match is a simple (now Python 3!) package for finding approximate image matches from a
 corpus.  It is similar, for instance, to [pHash](http://www.phash.org/), but
 includes a database backend that easily scales to billions of images and
