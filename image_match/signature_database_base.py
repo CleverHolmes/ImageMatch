@@ -267,13 +267,15 @@ class SignatureDatabaseBase(object):
 
             l = self.search_single_record(transformed_record)
             result.extend(l)
-        r = sorted(np.unique(result).tolist(), key=itemgetter('dist'))
-        s = set([x['id'] for x in r])
-        for i, x in enumerate(r):
-            if x['id'] not in s:
-                r.pop(i)
-            else:
-                s.remove(x['id'])
+
+        ids = set()
+        unique = []
+        for item in result:
+            if item['id'] not in ids:
+                unique.append(item)
+                ids.add(item['id'])
+
+        r = sorted(unique, key=itemgetter('dist'))
         return r
 
 
