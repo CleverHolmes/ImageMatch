@@ -171,3 +171,15 @@ def test_all_orientations(ses):
         r = ses.search_image(f.read(), bytestream=True, all_orientations=True)
         assert len(r) == 1
         assert r[0]['dist'] < 0.05  # some error from rotation
+
+
+def test_duplicate(ses):
+    ses.add_image('test1.jpg')
+    ses.add_image('test1.jpg')
+    sleep(1)
+    r = ses.search_image('test1.jpg')
+    assert len(r) == 2
+    assert r[0]['path'] == 'test1.jpg'
+    assert 'score' in r[0]
+    assert 'dist' in r[0]
+    assert 'id' in r[0]
