@@ -183,3 +183,15 @@ def test_duplicate(ses):
     assert 'score' in r[0]
     assert 'dist' in r[0]
     assert 'id' in r[0]
+
+
+def test_duplicate_removal(ses):
+    for i in range(10):
+        ses.add_image('test1.jpg')
+    sleep(1)
+    r = ses.search_image('test1.jpg')
+    assert len(r) == 10
+    ses.delete_duplicates('test1.jpg')
+    sleep(1)
+    r = ses.search_image('test1.jpg')
+    assert len(r) == 1

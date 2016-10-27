@@ -2,6 +2,7 @@ from .signature_database_base import SignatureDatabaseBase
 from .signature_database_base import normalized_distance
 from datetime import datetime
 import numpy as np
+from collections import deque
 
 
 class SignatureES(SignatureDatabaseBase):
@@ -91,3 +92,12 @@ class SignatureES(SignatureDatabaseBase):
         rec['timestamp'] = datetime.now()
         self.es.index(index=self.index, doc_type=self.doc_type, body=rec)
 
+    def delete_duplicates(self, path):
+        """Delete all but one entries in elasticsearch whose `path` value is equivalent to that of path.
+        Args:
+            path (string): path value to compare to those in the elastic search
+        """
+        matching_paths = [item['_id'] for item in self.es.search()['hits']['hits'] if item['_source']['path'] == path]
+        duplicate_ids_iter = iter(deque(matching_paths, len(matching_paths)-1))
+        for id_tag in duplicate_ids_iter:
+            self.es.delete(index=self.index, doc_type=self.doc_type, id=id_tag)
