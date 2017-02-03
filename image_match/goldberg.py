@@ -8,6 +8,11 @@ except ImportError:
     pass
 from io import BytesIO
 import numpy as np
+import xml.etree
+
+
+class CorruptImageError(RuntimeError):
+    pass
 
 
 class ImageSignature(object):
@@ -222,7 +227,10 @@ class ImageSignature(object):
                 img = Image.open(BytesIO(image_or_path))
             except IOError:
                 # could be an svg, attempt to convert
-                img = Image.open(BytesIO(svg2png(image_or_path)))
+                try:
+                    img = Image.open(BytesIO(svg2png(image_or_path)))
+                except (NameError, xml.etree.ElementTree.ParseError):
+                    raise CorruptImageError()
             img = img.convert('RGB')
             return rgb2gray(np.asarray(img, dtype=np.uint8))
         elif type(image_or_path) is str:
