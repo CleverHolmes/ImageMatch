@@ -89,7 +89,6 @@ setup(
     ],
     install_requires=[
         'scikit-image>=0.12,<0.13',
-        'cairosvg>1,<2',
         'elasticsearch>=2.3,<2.4',
     ],
     tests_require=tests_require,
@@ -97,5 +96,6 @@ setup(
         'test': tests_require,
         'dev':  dev_require + tests_require + docs_require,
         'docs':  docs_require,
+        'extra': ['cairosvg>1,<2'],
     },
 )
