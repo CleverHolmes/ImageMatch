@@ -10,6 +10,11 @@ includes a database backend that easily scales to billions of images and
 supports sustained high rates of image insertion: up to 10,000 images/s on our
 cluster!
 
+**PLEASE NOTE:** This algorithm is intended to find nearly duplicate images -- think copyright
+violation detection.  It is **NOT** intended to find images that are conceptually similar.
+For more explanation, see [this issue](https://github.com/ascribe/image-match/issues/62) or
+[this video](https://www.youtube.com/watch?v=DfWLBzArzKE).
+
 Based on the paper [_An image signature for any kind of image_, Wong et
 al](http://www.cs.cmu.edu/~hcwong/Pdfs/icip02.ps).  There is an existing
 [reference implementation](https://www.pureftpd.org/project/libpuzzle) which
