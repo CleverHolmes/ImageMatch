@@ -46,7 +46,7 @@ class SignatureES(SignatureDatabaseBase):
 
         super(SignatureES, self).__init__(*args, **kwargs)
 
-    def search_single_record(self, rec, filter=None):
+    def search_single_record(self, rec, pre_filter=None):
         path = rec.pop('path')
         signature = rec.pop('signature')
         if 'metadata' in rec:
@@ -61,8 +61,8 @@ class SignatureES(SignatureDatabaseBase):
             '_source': {'excludes': ['simple_word_*']}
         }
 
-        if filter is not None:
-            body['query']['filter'] = filter
+        if pre_filter is not None:
+            body['query']['filter'] = pre_filter
 
         res = self.es.search(index=self.index,
                               doc_type=self.doc_type,

@@ -13,7 +13,7 @@ class SignatureDatabaseBase(object):
 
     """
 
-    def search_single_record(self, rec, filter=None):
+    def search_single_record(self, rec, pre_filter=None):
         """Search for a matching image record.
 
         Must be implemented by derived class.
@@ -48,7 +48,7 @@ class SignatureDatabaseBase(object):
 
                  The number of simple words corresponds to the attribute N
 
-            filter (dict): a filter to be applied by the concrete implementation
+            pre_filter (dict): a filter to be applied by the concrete implementation
                    before applying the matching strategy
 
                 For example:
@@ -208,7 +208,7 @@ class SignatureDatabaseBase(object):
         rec = make_record(path, self.gis, self.k, self.N, img=img, bytestream=bytestream, metadata=metadata)
         self.insert_single_record(rec, refresh_after=refresh_after)
 
-    def search_image(self, path, all_orientations=False, bytestream=False, filter=None):
+    def search_image(self, path, all_orientations=False, bytestream=False, pre_filter=None):
         """Search for matches
 
         Args:
@@ -219,7 +219,7 @@ class SignatureDatabaseBase(object):
             bytestream (Optional[boolean]): will the image be passed as raw bytes?
                 That is, is the 'path_or_image' argument an in-memory image?
                 (default False)
-            filter (Optional[dict]): filter list before applying matching algorithm
+            pre_filter (Optional[dict]): filters list before applying the matching algorithm
                 (default None)
         Returns:
             a formatted list of dicts representing unique matches, sorted by dist
@@ -272,7 +272,7 @@ class SignatureDatabaseBase(object):
             # generate the signature
             transformed_record = make_record(transformed_img, self.gis, self.k, self.N)
 
-            l = self.search_single_record(transformed_record, filter=filter)
+            l = self.search_single_record(transformed_record, pre_filter=pre_filter)
             result.extend(l)
 
         ids = set()
