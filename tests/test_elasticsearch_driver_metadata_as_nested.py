@@ -24,8 +24,14 @@ MAPPINGS = {
             "type": "nested",
             "dynamic": True,
             "properties": { 
-                "tenant_id": { "type": "keyword" },
-                "project_id": { "type": "keyword" }
+                "tenant_id": { 
+                    "type": "string", 
+                    "index": "not_analyzed" 
+                },
+                "project_id": { 
+                    "type": "string", 
+                    "index": "not_analyzed" 
+                }
             } 
         }
       }
