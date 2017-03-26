@@ -62,7 +62,7 @@ class SignatureES(SignatureDatabaseBase):
         }
 
         if pre_filter is not None:
-            body['query']['filter'] = pre_filter
+            body['query']['bool']['filter'] = pre_filter
 
         res = self.es.search(index=self.index,
                               doc_type=self.doc_type,
