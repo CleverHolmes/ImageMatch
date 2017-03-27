@@ -24,10 +24,7 @@ MAPPINGS = {
             "type": "object",
             "dynamic": True,
             "properties": { 
-                "tenant_id": { 
-                    "type": "string", 
-                    "index": "not_analyzed" 
-                }
+                "tenant_id": { "type": "keyword" }
             } 
         }
       }
