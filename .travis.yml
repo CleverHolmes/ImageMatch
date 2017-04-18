@@ -1,13 +1,31 @@
 language: python
-python:
-  - 3.4
 
-services:
-  - elasticsearch
+addons:
+  apt:
+    packages:
+      - oracle-java8-installer
+
+before_install:
+  - sudo update-java-alternatives -s java-8-oracle
+  - export JAVA_HOME=/usr/lib/jvm/java-8-oracle/jre
+  - java -version
+
+python:
+  - 3.5
+
+env:
+  global:
+    - WAIT_FOR_ES=1
+    - ES_VERSION=5.2.2
 
 # From http://conda.pydata.org/docs/travis.html
+# https://github.com/elastic/elasticsearch-dsl-py/blob/master/.travis.yml
 install:
+  - mkdir /tmp/elasticsearch
+  - wget -O - https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-${ES_VERSION}.tar.gz | tar xz --directory=/tmp/elasticsearch --strip-components=1
+  - /tmp/elasticsearch/bin/elasticsearch -d  
   - sudo apt-get update
+
   # We do this conditionally because it saves us some downloading if the
   # version is the same.
   - if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]]; then

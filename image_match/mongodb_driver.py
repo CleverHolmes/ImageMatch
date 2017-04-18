@@ -42,7 +42,7 @@ class SignatureMongo(SignatureDatabaseBase):
         super(SignatureMongo, self).__init__(*args, **kwargs)
 
     def search_single_record(self, rec, n_parallel_words=1, word_limit=None,
-                             process_timeout=None, maximum_matches=1000):
+                             process_timeout=None, maximum_matches=1000, filter=None):
         if n_parallel_words is None:
             n_parallel_words = cpu_count()
 
