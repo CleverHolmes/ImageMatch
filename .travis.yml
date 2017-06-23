@@ -1,49 +1,28 @@
+sudo: required
+
+services:
+    - docker
+
 language: python
 
-addons:
-  apt:
-    packages:
-      - oracle-java8-installer
+python:
+    - 3.4
+
+cache: pip
 
 before_install:
-  - sudo update-java-alternatives -s java-8-oracle
-  - export JAVA_HOME=/usr/lib/jvm/java-8-oracle/jre
-  - java -version
+    - docker run -d -p 9200:9200
+      -e http.host=0.0.0.0
+      -e transport.host=127.0.0.1
+      -e xpack.security.enabled=false
+      -e xpack.monitoring.enabled=false
+      docker.elastic.co/elasticsearch/elasticsearch:5.4.2
 
-python:
-  - 3.5
-
-env:
-  global:
-    - WAIT_FOR_ES=1
-    - ES_VERSION=5.2.2
-
-# From http://conda.pydata.org/docs/travis.html
-# https://github.com/elastic/elasticsearch-dsl-py/blob/master/.travis.yml
 install:
-  - mkdir /tmp/elasticsearch
-  - wget -O - https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-${ES_VERSION}.tar.gz | tar xz --directory=/tmp/elasticsearch --strip-components=1
-  - /tmp/elasticsearch/bin/elasticsearch -d  
-  - sudo apt-get update
+    - pip install --upgrade pip
+    - pip install -e .[test]
 
-  # We do this conditionally because it saves us some downloading if the
-  # version is the same.
-  - if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]]; then
-      wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh -O miniconda.sh;
-    else
-      wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
-    fi
-  - bash miniconda.sh -b -p $HOME/miniconda
-  - export PATH="$HOME/miniconda/bin:$PATH"
-  - hash -r
-  - conda config --set always_yes yes --set changeps1 no
-  - conda update -q conda
-  # Useful for debugging any issues with conda
-  - conda info -a
+script: pytest
 
-  # Replace dep1 dep2 ... with your dependencies
-  - conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION numpy scipy scikit-image pytest
-  - source activate test-environment
-  - python setup.py install
-
-script: py.test -s -v
+notifications:
+    email: false
