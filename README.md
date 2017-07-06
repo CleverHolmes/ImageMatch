@@ -1,6 +1,7 @@
 [![PyPI](https://img.shields.io/pypi/status/image-match.svg?maxAge=2592000)](https://pypi.python.org/pypi/image-match)
 [![PyPI](https://img.shields.io/pypi/v/image-match.svg)](https://pypi.python.org/pypi/image-match)
 [![Documentation Status](https://readthedocs.org/projects/image-match/badge/?version=latest)](https://image-match.readthedocs.org/en/latest/)
+[![codecov](https://codecov.io/gh/ascribe/image-match/branch/master/graph/badge.svg)](https://codecov.io/gh/ascribe/image-match)
 
 ![image-match](https://cloud.githubusercontent.com/assets/6517700/17741093/41040a64-649b-11e6-8499-48b78ddca56b.png)
 
@@ -28,7 +29,7 @@ easy scaling and deployment.
 
 ### [Install and setup image-match](http://image-match.readthedocs.io/en/latest/start.html)
 
-Once you're up and running, read these two (short) sections of the documentation to get a feel 
+Once you're up and running, read these two (short) sections of the documentation to get a feel
 for what image-match is capable of:
 
 ### [Image signatures](http://image-match.readthedocs.io/en/latest/signatures.html)
