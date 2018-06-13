@@ -1,3 +1,5 @@
+**NOTICE:** I don't have a lot of time to maintain this library anymore, but I'll try to at least respond to questions.  If someone is interested in maintaining/developing image-match, please contact me.
+
 [![PyPI](https://img.shields.io/pypi/status/image-match.svg?maxAge=2592000)](https://pypi.python.org/pypi/image-match)
 [![PyPI](https://img.shields.io/pypi/v/image-match.svg)](https://pypi.python.org/pypi/image-match)
 [![Documentation Status](https://readthedocs.org/projects/image-match/badge/?version=latest)](https://image-match.readthedocs.org/en/latest/)
