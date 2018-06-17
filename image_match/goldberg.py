@@ -6,6 +6,7 @@ try:
     from cairosvg import svg2png
 except ImportError:
     pass
+from six import string_types, text_type
 from io import BytesIO
 import numpy as np
 import xml.etree
@@ -233,7 +234,8 @@ class ImageSignature(object):
                     raise CorruptImageError()
             img = img.convert('RGB')
             return rgb2gray(np.asarray(img, dtype=np.uint8))
-        elif type(image_or_path) is str:
+        elif type(image_or_path) in string_types or \
+             type(image_or_path) is text_type:
             return imread(image_or_path, as_grey=True)
         elif type(image_or_path) is bytes:
             try:
