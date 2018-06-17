@@ -26,6 +26,17 @@ def test_load_from_file():
     assert sig.shape == (648,)
 
 
+def test_load_from_unicode_path():
+    try:
+        path = u'test.jpg'
+    except NameError:
+        return
+    gis = ImageSignature()
+    sig = gis.generate_signature(path)
+    assert type(sig) is ndarray
+    assert sig.shape == (648,)
+
+
 def test_load_from_stream():
     gis = ImageSignature()
     with open('test.jpg', 'rb') as f:
