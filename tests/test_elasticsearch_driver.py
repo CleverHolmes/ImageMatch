@@ -1,7 +1,10 @@
 import pytest
-import urllib.request
 import os
 import hashlib
+try:
+    from urllib.request import urlretrieve
+except:
+    from urllib import urlretrieve
 from elasticsearch import Elasticsearch, ConnectionError, RequestError, NotFoundError
 from time import sleep
 
@@ -10,22 +13,22 @@ from PIL import Image
 
 test_img_url1 = 'https://camo.githubusercontent.com/810bdde0a88bc3f8ce70c5d85d8537c37f707abe/68747470733a2f2f75706c6f61642e77696b696d656469612e6f72672f77696b6970656469612f636f6d6d6f6e732f7468756d622f652f65632f4d6f6e615f4c6973612c5f62795f4c656f6e6172646f5f64615f56696e63692c5f66726f6d5f4332524d465f7265746f75636865642e6a70672f36383770782d4d6f6e615f4c6973612c5f62795f4c656f6e6172646f5f64615f56696e63692c5f66726f6d5f4332524d465f7265746f75636865642e6a7067'
 test_img_url2 = 'https://camo.githubusercontent.com/826e23bc3eca041110a5af467671b012606aa406/68747470733a2f2f63322e737461746963666c69636b722e636f6d2f382f373135382f363831343434343939315f303864383264653537655f7a2e6a7067'
-urllib.request.urlretrieve(test_img_url1, 'test1.jpg')
-urllib.request.urlretrieve(test_img_url2, 'test2.jpg')
+urlretrieve(test_img_url1, 'test1.jpg')
+urlretrieve(test_img_url2, 'test2.jpg')
 
 INDEX_NAME = 'test_environment_{}'.format(hashlib.md5(os.urandom(128)).hexdigest()[:12])
 DOC_TYPE = 'image'
 MAPPINGS = {
   "mappings": {
-    DOC_TYPE: { 
+    DOC_TYPE: {
       "dynamic": True,
-      "properties": { 
-        "metadata": { 
+      "properties": {
+        "metadata": {
             "type": "object",
             "dynamic": True,
-            "properties": { 
+            "properties": {
                 "tenant_id": { "type": "keyword" }
-            } 
+            }
         }
       }
     }
@@ -196,7 +199,7 @@ def test_lookup_with_filter_by_metadata(ses):
 
     r = ses.search_image('test1.jpg', pre_filter={"term": {"metadata.tenant_id": "bar-3"}})
     assert len(r) == 0
-    
+
 
 def test_all_orientations(ses):
     im = Image.open('test1.jpg')
