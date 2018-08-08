@@ -88,7 +88,7 @@ setup(
         'pytest-runner',
     ],
     install_requires=[
-        'scikit-image>=0.12',
+        'scikit-image>=0.14',
         'elasticsearch>=5.0.0,<6.0.0',
         'six>=1.11.0',
     ],
