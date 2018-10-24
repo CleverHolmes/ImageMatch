@@ -1,7 +1,7 @@
 [![PyPI](https://img.shields.io/pypi/status/image-match.svg?maxAge=2592000)](https://pypi.python.org/pypi/image-match)
 [![PyPI](https://img.shields.io/pypi/v/image-match.svg)](https://pypi.python.org/pypi/image-match)
 [![Documentation Status](https://readthedocs.org/projects/image-match/badge/?version=latest)](https://image-match.readthedocs.org/en/latest/)
-[![codecov](https://codecov.io/gh/ascribe/image-match/branch/master/graph/badge.svg)](https://codecov.io/gh/ascribe/image-match)
+[![codecov](https://codecov.io/gh/edjolabs/image-match/branch/master/graph/badge.svg)](https://codecov.io/gh/edjolabs/image-match)
 
 ![image-match](https://cloud.githubusercontent.com/assets/6517700/17741093/41040a64-649b-11e6-8499-48b78ddca56b.png)
 
@@ -13,7 +13,7 @@ cluster!
 
 **PLEASE NOTE:** This algorithm is intended to find nearly duplicate images -- think copyright
 violation detection.  It is **NOT** intended to find images that are conceptually similar.
-For more explanation, see [this issue](https://github.com/ascribe/image-match/issues/62) or
+For more explanation, see [this issue](https://github.com/edjo-labs/image-match/issues/62) or
 [this video](https://www.youtube.com/watch?v=DfWLBzArzKE).
 
 Based on the paper [_An image signature for any kind of image_, Wong et
