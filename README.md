@@ -1,3 +1,5 @@
+# NOTE: this repository is no longer maintained; PRs and issues will probably be ignored. If you are interested in taking over development/maintainership of image-match, please contact me at the email address in my public profile. Thank you!
+
 [![PyPI](https://img.shields.io/pypi/status/image-match.svg?maxAge=2592000)](https://pypi.python.org/pypi/image-match)
 [![PyPI](https://img.shields.io/pypi/v/image-match.svg)](https://pypi.python.org/pypi/image-match)
 [![Documentation Status](https://readthedocs.org/projects/image-match/badge/?version=latest)](https://image-match.readthedocs.org/en/latest/)
